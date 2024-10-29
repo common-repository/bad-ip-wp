@@ -1,0 +1,242 @@
+{% extends 'base.twig' %}
+{% block stylesheets %}
+{% endblock %}
+{% block content %}
+
+<div class="container-fluid" style="margin-top: 15px;">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Settings</h1>
+
+    <div class="row">
+
+        <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer;">
+            <div title="Current state: {% if settings.login_incidents == 1 %}ON{% else %}OFF{% endif %}" class="card {% if settings.login_incidents == 1 %}border-left-success{% else %}border-left-danger{% endif %} shadow h-100 py-2">
+                <div class="card-body" onclick="javascript:document.getElementById('form-login-incidents').submit();">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Login Incidents</div>
+                            <p>Prevent and report manual and automated attacks on your website login page</p>
+
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">  </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-sign-in-alt fa-2x {% if settings.login_incidents == 1 %}text-success{% else %}text-danger{% endif %}"></i>
+                        </div>
+                    </div>
+
+                    <form id="form-login-incidents" action=" " method="POST">
+                        {#<input type="checkbox" name="login_incidents" id="login_incidents" checked hidden>#}
+                        <input type="text" name="login_incidents" id="login_incidents" value="{{ settings.login_incidents }}" hidden>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer;">
+            <div title="Current state: {% if settings.bad_queries == 1 %}ON{% else %}OFF{% endif %}" class="card {% if settings.bad_queries == 1 %}border-left-success{% else %}border-left-danger{% endif %} shadow h-100 py-2">
+                <div class="card-body" onclick="javascript:document.getElementById('form-bad_queries').submit();">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bad Queries</div>
+                            <p>Detect and prevent exploiting and data leakage of your website by bad queries  </p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">  </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-spider fa-2x {% if settings.bad_queries == 1 %}text-success{% else %}text-danger{% endif %}"></i>
+                        </div>
+                    </div>
+
+                    <form id="form-bad_queries" action=" " method="POST">
+                        <input type="text" name="bad_queries" id="bad_queries" value="{{ settings.bad_queries }}" hidden>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer;">
+            <div title="Current state: {% if settings.tor_block == 1 %}ON{% else %}OFF{% endif %}" class="card {% if settings.tor_block == 1 %}border-left-success{% else %}border-left-danger{% endif %} shadow h-100 py-2">
+                <div class="card-body" onclick="javascript:document.getElementById('form-tor').submit();">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tor Block</div>
+                            <p>Many bad actors use Tor to recon your site in anonymity mode before attacking it   </p>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">   </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-project-diagram fa-2x {% if settings.tor_block == 1 %}text-success{% else %}text-danger{% endif %}"></i>
+                        </div>
+                    </div>
+
+                    <form id="form-tor" action=" " method="POST">
+                        <input type="text" name="tor_block" id="tor_block" value="{{ settings.tor_block }}" hidden>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4" style="cursor: pointer;">
+            <div title="Current state: {% if settings.deny_access == 1 %}ON{% else %}OFF{% endif %}" class="card {% if settings.deny_access == 1 %}border-left-success{% else %}border-left-danger{% endif %} shadow h-100 py-2">
+                <div class="card-body" onclick="javascript:document.getElementById('form-deny-access').submit();">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Deny Access</div>
+                            <p>Deny access to your website for all recorded <code>bad_ip`s</code> </p>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">  </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shield-alt fa-2x {% if settings.deny_access == 1 %}text-success{% else %}text-danger{% endif %}"></i>
+                        </div>
+                    </div>
+
+                    <form id="form-deny-access" action=" " method="POST">
+                        <input type="text" name="deny_access" id="deny_access" value="{{ settings.deny_access }}" hidden>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="card col-lg-12">
+                <div class="card-header py-3 d-flex bg-info flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-white">General</h6>
+                    {# //todo for next version #}
+                    {# <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" x-placement="bottom-end" style="position: absolute; transform: translate3d(-156px, 19px, 0px); top: 0px; left: 0px; will-change: transform;">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div> #}
+                </div>
+                <div class="card-body">
+                    <p>Number of failed logins before incident get submitted </p>
+                    <form id="form-login_attempts" action=" " method="POST">
+                    <select name="login_attempts" id="login_attempts" onchange="javascript:document.getElementById('form-login_attempts').submit();">
+                        <option value="" selected disabled>--Please choose an option--</option>
+
+                        {% for num in [1,2,3,4,5] %}
+                            {% if settings.login_attempts == num %}
+                                <option value="{{ num }}" selected>{{ num }}</option>
+                            {% else %}
+                                <option value="{{ num }}">{{ num }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    </form>
+                    <hr>
+                    <div class="my-2"></div>
+
+                    <p>Report the origin of the incident. <br>If turned on, your website domain will be used as origin </p>
+                    <a title="Current state: {% if settings.origin == 1 %}ON{% else %}OFF{% endif %}" onclick="javascript:document.getElementById('form-origin').submit();" href="javascript:void(0);" class="btn {% if settings.origin == 1 %}btn-success{% else %}btn-danger{% endif %} btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-{% if settings.origin == 1 %}check{% else %}minus-circle{% endif %}"></i>
+                    </span>
+                        <span class="text">Incident Origin</span>
+                    </a>
+                    <form id="form-origin" action=" " method="POST">
+                        <input type="text" name="origin" id="origin" value="{{ settings.origin }}" hidden>
+                    </form>
+                    <hr>
+                    <div class="my-2"></div>
+
+                    <p>Ignore crawler bots. <br/>If turned on, plugin will ignore IP's that have signature of known crawler bots.<br/>
+                     <i>Take care that some bad actors and bots use browser like user agent to fake their identity</i></p>
+                    <a title="Current state: {% if settings.bot_access == 1 %}ON{% else %}OFF{% endif %}" onclick="javascript:document.getElementById('form-bot_access').submit();" href="javascript:void(0);" class="btn {% if settings.bot_access == 1 %}btn-success{% else %}btn-danger{% endif %} btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-{% if settings.bot_access == 1 %}check{% else %}minus-circle{% endif %}"></i>
+                    </span>
+                        <span class="text">Web Crawlers</span>
+                    </a>
+                    <form id="form-bot_access" action=" " method="POST">
+                        <input type="text" name="bot_access" id="bot_access" value="{{ settings.bot_access }}" hidden>
+                    </form>
+                    
+                    <div class="my-2"></div>
+
+                </div>
+            </div>
+        </div>
+
+        
+{# 
+        <div class="col-lg-6">
+
+            <div class="card  col-lg-12">
+                <div class="card-header bg-info py-3">
+                    <h6 class="m-0 font-weight-bold text-white">Web crawlers</h6>
+                </div>
+                <div class="card-body"> #}
+
+
+                    {# <p>Delete all records from the logs </p>
+                    <a onclick="javascript:alert('Currently disabled. Uninstalling plugin will clear report database');" href="#" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-minus-circle"></i>
+                    </span>
+                        <span class="text">Clear Logs</span>
+                    </a>
+                    <div class="my-2"></div> #}
+
+                {# </div>
+            </div>
+
+
+        </div> #}
+
+        <div class="col-lg-6">
+
+            <div class="card  col-lg-12">
+                <div class="card-header py-3 d-flex bg-dark flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-white">Whitelist | Blacklist</h6>
+
+                    <a id="saveLists" onclick="javascript:document.getElementById('form-lists').submit();" href="javascript:void(0);" class="btn btn-success btn-icon-split" style="display: none">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-{% if settings.origin == 1 %}check{% else %}minus-circle{% endif %}"></i>
+                    </span>
+                        <span class="text">Save</span>
+                    </a>
+
+                </div>
+                <div class="card-body">
+                    <form id="form-lists" action=" " method="POST">
+                        <div class="row">
+                            <div class="card col-lg-6">
+                                <p>Add IP's that you trust that cannot be reported or blocked</p>
+                                <textarea id="whiteListTXT" name="whiteListText" rows="13" class="whitelisttxt" placeholder="Separate IP addresses by space or new line">{% if whiteList %}{{ whiteList }}{% endif %}</textarea>
+                            </div>
+                            <div class="card col-lg-6">
+                                <p>Add IP's that you want to block from accessing your website</p>
+                                <textarea id="blackListTXT" name="blackListText" rows="13" class="blacklisttxt text-white" placeholder="Separate IP addresses by space or new line" style="background-color:black;">{% if blackList %}{{ blackList }}{% endif %}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+<!-- /.container-fluid -->
+{% endblock %}
+
+{% block javascriptfoot %}
+
+
+{% endblock %}

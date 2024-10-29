@@ -1,0 +1,20 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ .blacklist-container {
+	height: 260px;
+	overflow: scroll;
+	overflow-x: hidden;
+	margin-bottom: 20px;
+    border-bottom: 1px solid #CCC;
+ }
+
+ .whitelist-container {
+	height: 260px;
+	overflow: scroll;
+	overflow-x: hidden;
+	margin-bottom: 20px;
+    border-bottom: 1px solid #CCC;
+ }
